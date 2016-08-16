@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+version = 1.2
+sourceCompatibility = 1.8
+
+dependencies {
+    compile fileTree(dir: 'lib', include: ['*.jar'])
+    compile group: 'org.apache.commons', name: 'commons-csv', version: '1.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    baseName = 'RTS-EntityImporter'
+    manifest {
+        attributes 'Built-By': System.getProperty('user.name'),
+                'Built-Date': new Date(),
+                'Built-JDK': sourceCompatibility,
+                'Specification-Version': version
+    }
+}
